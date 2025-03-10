@@ -1,2 +1,11 @@
 # pharaohs-shuffle
-A thought experiment in the "randomness" of a perfect card deck shuffle
+
+Late one night in West Virginia, I got curious trying my best to shuffle a deck of cards. You have a standard ordered 52 card deck. We use a shuffling method called the Pharaoh’s shuffle that splits the deck in half and sandwiches them between each other, such that if we called the halves decks A and B, the order would begin Ace of Spades (A), Ace of Spades (B), Two of Spades (A), Two of Spades (B) etc. Assuming the original deck is perfectly ordered, how many of these shuffles would it take to create the most "random" possible sequence?
+
+It turned into an hours-long argument with a few friends, to the annoyance of everyone else in the house. We arrived at the idea that there's no perfect answer because the process is deterministic, but I felt like there has to be a point at which the order of the cards is the most chaotic compared to the original order before it begins to decrease in entropy, and theoretically returns to the original order after a certain number of shuffles. Most LLMs I consulted said that number was 8. This idea is seemingly corroborated in Bayer and Diaconis (1992) which suggested that in the dovetail shuffle (more random than Pharaoh, basically the "bridge" hand shuffle) the disorder would actually peak around 6 or 7, not 4.
+
+But this isn't the dovetail shuffle – it's much less "random." So I simulated it in R using a couple different metrics of disorder – inversions measures the number of out of order pairs, hamming distance is the number of cards moved from their original positions in the sequence, Shannon entropy measures distribution probabilites, Kalmogarov complexity captures algorithmic entropy, and random walk deviation tracks the difference from expected random positions.
+
+Based on the visualizations of the simulation, we can see that almost all the metrics suggest disorder peaks at 4 shuffles – predictably, the midpoint between the original sequence and the eighth shuffle where Pharaoh's shuffle reconstructs the original sequence. As this method is a perfectly deterministic and cyclical process, there is no true randomness, but we see a pattern that somewhat mimics randomness, save for the fact that in a maximally chaotic Pharaoh's deck there lies the potential to perfectly recreate the original deck.
+
+So the next time you're shuffling a deck of cards, you'd be better off playing 52 Pickup than attempting the Pharaoh's shuffle.
